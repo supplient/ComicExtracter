@@ -35,7 +35,7 @@ def moveToSepearteFolder(folder_path, tmp_folder_name="this_is_a_tmp_folder"):
 
         subbase = os.path.basename(subfile)
         subbase = subbase.strip()
-        sub_newpath = os.path.join(folder_path, subbase).strip()
+        sub_newpath = os.path.join(folder_path, subbase)
 
         try:
             os.rename(subfile, tmp_path)

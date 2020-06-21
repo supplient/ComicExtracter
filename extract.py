@@ -6,6 +6,7 @@ from exceptions import BadPasswordError, NotSupportError
 def getExtractPath(path, dest_dir):
     basename = os.path.basename(path)
     purename, ext = os.path.splitext(basename)
+    purename = purename.strip()
     extract_path = os.path.join(dest_dir, purename)
     return extract_path
 
