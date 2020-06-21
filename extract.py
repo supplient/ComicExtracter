@@ -1,4 +1,4 @@
-import zipfile, rarfile, lib7z
+import gbk_zipfile, rarfile, lib7z
 import os
 import tqdm
 from exceptions import BadPasswordError, NotSupportError
@@ -10,7 +10,7 @@ def getExtractPath(path, dest_dir):
     return extract_path
 
 def zip_extract(path, dest_dir, pwd):
-    with zipfile.ZipFile(path) as fd:
+    with gbk_zipfile.ZipFile(path) as fd:
         try:
             fd.extractall(path=dest_dir, pwd=bytes(pwd, "utf8"))
         except RuntimeError:
@@ -31,7 +31,7 @@ def sevenz_extract(path, dest_dir, pwd):
 
 def extract(path, dest_dir, pwds):
     mth = None
-    if(zipfile.is_zipfile(path)):
+    if(gbk_zipfile.is_zipfile(path)):
         mth = zip_extract
     elif(rarfile.is_rarfile(path)):
         mth = rar_extract
@@ -67,7 +67,7 @@ def extractFilesInFolder(folder_path, dest_dir_path, pwds):
                 failed_list.append([f, "Bad Password"])
             except NotSupportError:
                 failed_list.append([f, "Not Support"])
-            except Exception:
+            except Exception as e:
                 failed_list.append([f, "Unknown"])
     return failed_list
 
